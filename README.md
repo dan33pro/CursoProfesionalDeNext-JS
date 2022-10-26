@@ -1,3 +1,6 @@
+# CursoProfesionalDeNext-JS
+Este es mi desarrollo de te proyecto enfocado en el e-comerse ReactShop que hemos trabajado anteriormente, pero esta vez sera al app para los administradores.
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
