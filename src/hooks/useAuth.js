@@ -1,5 +1,5 @@
 import React, { useState, useContext, createContext } from 'react';
-import Cokie from 'js-cookie';
+import Cookie from 'js-cookie';
 import axios from 'axios';
 import endPonits from '@services/api/';
 
@@ -15,6 +15,11 @@ export const useAuth = () => {
 };
 
 function useProvideAuth() {
+    const [failLogin, setFailLogin] = useState(false);
+    const failLoginController = (estado) => {
+        setFailLogin(estado);
+    };
+    
     const [user, setUser] = useState(null);
     const signIn = async (email, password) => {
         const options = {
@@ -25,11 +30,21 @@ function useProvideAuth() {
         };
 
         const { data: access_token } = await axios.post(endPonits.auth.login, { email, password }, options);
-        console.log(access_token);
+        if (access_token) {
+            const token = access_token.access_token;
+            Cookie.set('token', token, { expires: 5 });
+
+            axios.defaults.headers.Authorization = `Bearer ${token}`;
+            const { data: user } = await axios.get(endPonits.auth.profile);
+            console.log(user);
+            setUser(user);
+        }
     };
 
     return {
         user,
         signIn,
+        failLogin,
+        failLoginController,
     };
 };
