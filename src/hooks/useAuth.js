@@ -15,6 +15,11 @@ export const useAuth = () => {
 };
 
 function useProvideAuth() {
+    const [ logInState, setLogInState ] = useState(false);
+    const changeLogInState = (logInS) => {
+        setLogInState(logInS);
+    };
+
     const [failLogin, setFailLogin] = useState(false);
     const failLoginController = (estado) => {
         setFailLogin(estado);
@@ -46,5 +51,7 @@ function useProvideAuth() {
         signIn,
         failLogin,
         failLoginController,
+        logInState,
+        changeLogInState,
     };
 };

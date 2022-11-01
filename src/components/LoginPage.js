@@ -16,6 +16,7 @@ export default function LoginPage() {
 
     auth.signIn(email, password).then(() => {
       auth.failLoginController(false);
+      auth.changeLogInState(true);
       router.push('/dashboard');
     }, (error) => {
       auth.failLoginController(true);
