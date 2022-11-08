@@ -88,9 +88,9 @@ export default function Dashboard() {
         <Chart chartData={data} />
       </div>
       <div className="w-100 flex aling-middle">
-        <ul className="flex aling-middle m-auto">
+        <ul className="flex-nowrap aling-middle m-auto w-10/12">
           <li 
-            className="inline-block bg-blue-50 mx-1 p-2 w-auto text-white text-center bg-blue-400 rounded hover:bg-blue-600"
+            className="inline-block bg-blue-50 m-1 p-2 w-auto text-white text-center bg-blue-400 rounded hover:bg-blue-600"
             onClick={btnAnterior}
             onKeyDown={btnAnterior}
           >
@@ -98,7 +98,7 @@ export default function Dashboard() {
           </li>
           {btns.map((btn) => (
             <li
-              className="inline-block bg-blue-50 mx-1 py-2 w-8 text-white text-center bg-blue-400 rounded hover:bg-blue-600"
+              className="inline-block bg-blue-50 m-1 py-2 w-8 text-white text-center bg-blue-400 rounded hover:bg-blue-600"
               value={btn.val}
               key={btn.val}
               onClick={() => updateProducts(btn.val)}
@@ -107,7 +107,7 @@ export default function Dashboard() {
             </li>
           ))}
           <li 
-            className="inline-block bg-blue-50 mx-1 p-2 w-auto text-white text-center bg-blue-400 rounded hover:bg-blue-600"
+            className="inline-block bg-blue-50 m-1 p-2 w-auto text-white text-center bg-blue-400 rounded hover:bg-blue-600"
             onClick={btnSiguiente}
             onKeyDown={btnSiguiente}
           >
@@ -134,12 +134,6 @@ export default function Dashboard() {
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       Id
                     </th>
-                    <th scope="col" className="relative px-6 py-3">
-                      <span className="sr-only">Edit</span>
-                    </th>
-                    <th scope="col" className="relative px-6 py-3">
-                      <span className="sr-only">Delete</span>
-                    </th>
                   </tr>
                 </thead>
                 <tbody className="bg-white divide-y divide-gray-200">
@@ -162,16 +156,6 @@ export default function Dashboard() {
                         <span className="px-2 inline-flex text-xs leading-5 font-semibold rounded-full bg-green-100 text-green-800">${product.price}</span>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{product.id}</td>
-                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="#" className="text-indigo-600 hover:text-indigo-900">
-                          Edit
-                        </a>
-                      </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <a href="#" className="text-indigo-600 hover:text-indigo-900">
-                          Delete
-                        </a>
-                      </td>
                     </tr>
                   ))}
                 </tbody>

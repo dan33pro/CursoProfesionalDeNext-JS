@@ -1,4 +1,5 @@
 import React, { useState, useContext, createContext } from 'react';
+import { useRouter } from 'next/router';
 import Cookie from 'js-cookie';
 import axios from 'axios';
 import endPonits from '@services/api/';
@@ -15,16 +16,8 @@ export const useAuth = () => {
 };
 
 function useProvideAuth() {
-    const [ logInState, setLogInState ] = useState(false);
-    const changeLogInState = (logInS) => {
-        setLogInState(logInS);
-    };
 
-    const [failLogin, setFailLogin] = useState(false);
-    const failLoginController = (estado) => {
-        setFailLogin(estado);
-    };
-    
+    const router = useRouter();
     const [user, setUser] = useState(null);
     const signIn = async (email, password) => {
         const options = {
@@ -41,9 +34,40 @@ function useProvideAuth() {
 
             axios.defaults.headers.Authorization = `Bearer ${token}`;
             const { data: user } = await axios.get(endPonits.auth.profile);
-            console.log(user);
             setUser(user);
         }
+    };
+
+    const refreshLogIn = async () => {
+        const token = Cookie.get('token');
+        if (token) {
+            axios.defaults.headers.Authorization = `Bearer ${token}`;
+            const { data: user } = await axios.get(endPonits.auth.profile);
+            setUser(user);
+            changeLogInState(true);
+        } else {
+            const rutaActual = router.pathname;
+            if (!logInState && rutaActual != '/login' && rutaActual != '/') {
+                router.push('/login');
+            }
+        }
+    }
+
+    const [failLogin, setFailLogin] = useState(false);
+    const failLoginController = (estado) => {
+        setFailLogin(estado);
+    };
+
+    const [logInState, setLogInState] = useState(false);
+    const changeLogInState = (logInS) => {
+        setLogInState(logInS);
+    };
+
+    const logout = () => {
+        Cookie.remove('token');
+        setUser(null);
+        delete axios.defaults.headers.authorization;
+        window.location.href = '/login';
     };
 
     return {
@@ -53,5 +77,7 @@ function useProvideAuth() {
         failLoginController,
         logInState,
         changeLogInState,
+        refreshLogIn,
+        logout,
     };
 };

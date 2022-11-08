@@ -10,9 +10,9 @@ const endPoints = {
         getProduct: (id) => `${API}/api/${VERSION}/products/${id}/`,
         getAnyProducts: (inicio, fin) => `${API}/api/${VERSION}/products?offset=${inicio}&limit=${fin}`,
         getProducts: `${API}/api/${VERSION}/products/`,
-        addProducts: `${API}/api/${VERSION}/products/`,
-        updateProducts: (id) => `${API}/api/${VERSION}/products/${id}/`,
-        deleteProducts: (id) => `${API}/api/${VERSION}/products/${id}/`,
+        addProduct: `${API}/api/${VERSION}/products/`,
+        updateProduct: (id) => `${API}/api/${VERSION}/products/${id}/`,
+        deleteProduct: (id) => `${API}/api/${VERSION}/products/${id}/`,
     },
     categories: {
         getCategory: (id) => `${API}/api/${VERSION}/categories/${id}/`,
