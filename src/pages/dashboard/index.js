@@ -2,6 +2,7 @@ import { useState } from 'react';
 import useFetch from '@hooks/useFetch';
 import endPoints from '@services/api';
 import { Chart } from '@common/Chart';
+import Image from 'next/image';
 
 let product_limit = 1;
 let product_offset = 100;
@@ -38,7 +39,7 @@ export default function Dashboard() {
       ],
     };
     setData(nData);
-  }
+  };
 
   let btns = [];
 
@@ -54,7 +55,7 @@ export default function Dashboard() {
   };
   loadingBtns();
 
-  const [actualSelection, setActualSelection] = useState(1); 
+  const [actualSelection, setActualSelection] = useState(1);
   const changeActualSelection = (valor) => {
     setActualSelection(valor);
   };
@@ -72,14 +73,14 @@ export default function Dashboard() {
   };
 
   const btnAnterior = () => {
-    if ( actualSelection - 1 >= 1 ) {   
-      updateProducts(actualSelection-1);
+    if (actualSelection - 1 >= 1) {
+      updateProducts(actualSelection - 1);
     }
   };
 
   const btnSiguiente = () => {
-    if ( actualSelection + 1 <=  countBtns) {
-      updateProducts(actualSelection+1);
+    if (actualSelection + 1 <= countBtns) {
+      updateProducts(actualSelection + 1);
     }
   };
   return (
@@ -89,28 +90,22 @@ export default function Dashboard() {
       </div>
       <div className="w-100 flex aling-middle">
         <ul className="flex-nowrap aling-middle m-auto w-10/12">
-          <li 
-            className="inline-block bg-blue-50 m-1 p-2 w-auto text-white text-center bg-blue-400 rounded hover:bg-blue-600"
-            onClick={btnAnterior}
-            onKeyDown={btnAnterior}
-          >
+          <li role="menuitem" className="inline-block bg-blue-50 m-1 p-2 w-auto text-white text-center bg-blue-400 rounded hover:bg-blue-600" onClick={btnAnterior} onKeyDown={btnAnterior}>
             Anterior
           </li>
           {btns.map((btn) => (
             <li
+              role="menuitem"
               className="inline-block bg-blue-50 m-1 py-2 w-8 text-white text-center bg-blue-400 rounded hover:bg-blue-600"
               value={btn.val}
               key={btn.val}
               onClick={() => updateProducts(btn.val)}
+              aria-hidden="true"
             >
               {btn.val}
             </li>
           ))}
-          <li 
-            className="inline-block bg-blue-50 m-1 p-2 w-auto text-white text-center bg-blue-400 rounded hover:bg-blue-600"
-            onClick={btnSiguiente}
-            onKeyDown={btnSiguiente}
-          >
+          <li role="menuitem" className="inline-block bg-blue-50 m-1 p-2 w-auto text-white text-center bg-blue-400 rounded hover:bg-blue-600" onClick={btnSiguiente} onKeyDown={btnSiguiente}>
             Siguiente
           </li>
         </ul>
@@ -142,7 +137,7 @@ export default function Dashboard() {
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
                           <div className="flex-shrink-0 h-10 w-10">
-                            <img className="h-10 w-10 rounded-full" src={product.images[0]} alt="" />
+                            <Image className="h-10 w-10 rounded-full" src={product.images[0]} alt="" />
                           </div>
                           <div className="ml-4">
                             <div className="text-sm font-medium text-gray-900">{product.title}</div>

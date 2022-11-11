@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 
 const MainLayout = ({ children }) => {
   const auth = useAuth();
-  const [ visualizar, setVisulizar ] = useState(false);
+  const [visualizar, setVisulizar] = useState(false);
 
   useEffect(() => {
     if (!auth?.user) {
@@ -15,16 +15,17 @@ const MainLayout = ({ children }) => {
   }, [auth.logInState]);
 
   return (
-    <> {
-      visualizar &&
-      <div className="min-h-full">
-        {auth.logInState && <Header />}
-        <Nav />
-        <main>
-          <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">{children}</div>
-        </main>
-      </div>
-    }
+    <>
+      {' '}
+      {visualizar && (
+        <div className="min-h-full">
+          {auth.logInState && <Header />}
+          <Nav />
+          <main>
+            <div className="max-w-7xl mx-auto py-6 sm:px-6 lg:px-8">{children}</div>
+          </main>
+        </div>
+      )}
     </>
   );
 };
