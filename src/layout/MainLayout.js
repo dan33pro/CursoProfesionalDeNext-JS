@@ -2,6 +2,7 @@ import Header from '@components/Header';
 import Nav from '@common/Nav';
 import { useAuth } from '@hooks/useAuth';
 import { useEffect, useState } from 'react';
+import Head from 'next/head';
 
 const MainLayout = ({ children }) => {
   const auth = useAuth();
@@ -16,7 +17,9 @@ const MainLayout = ({ children }) => {
 
   return (
     <>
-      {' '}
+      <Head>
+        <link rel='manifest' href='/manifest.json' />
+      </Head>
       {visualizar && (
         <div className="min-h-full">
           {auth.logInState && <Header />}
